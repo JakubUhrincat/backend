@@ -1,12 +1,12 @@
 version: "3.3"
 
 services:
-  library:
+  skuska:
     restart: always
     image: sameersbn/postgresql:10-2
     environment:
       - PG_TRUST_LOCALNET=true
-      - DB_NAME=library
+      - DB_NAME=skuska
       - DB_USER=postgres
       - DB_PASS=postgres
       - PG_RUNDIR=/run/postgres
@@ -16,6 +16,16 @@ services:
     volumes:
       - data:/var/lib/postgresql
       - logs:/var/log/postgresql
+
+  backend:
+    image: be
+    ports:
+      - "8080:8080"
+
+  frontend:
+    image: fe
+    ports:
+      - "80:80"
 
 volumes:
   data:
